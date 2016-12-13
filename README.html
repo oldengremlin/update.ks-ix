@@ -12,3 +12,46 @@
 
 <h2>Як користуватися?</h2>
 <pre>$ ./update.ks-ix.pl -rJunRouterIP -uu5ername -p5uperpa55w0rd</pre>
+
+<h2>Трішки про конфігурацію policy-options на Juniper-і</h2>
+<pre>policy-statement AS-KS-IX {
+    term prefixes {
+        from {
+            community AS-KS-IX;
+            route-filter 41.76.232.0/21 exact accept;
+            … skip …
+            route-filter 195.38.16.0/23 exact accept;
+        }
+        then {
+            local-preference 300;
+            accept;
+        }
+    }
+    term next {
+        then next policy;
+    }
+}
+
+policy-statement REJECT {
+    then reject;
+}
+
+community AS-KS-IX members 8695:64000;</pre>
+
+<h3>…та protocols bgp group uplinks</h3>
+<pre>neighbor A.A.A.A {
+    description KS-IX;
+    local-address B.B.B.B;
+    import [ AS-KS-IX REJECT ];
+    family inet {
+        any {
+            accepted-prefix-limit {
+                maximum 5000;
+                teardown 85 idle-timeout 2;
+            }
+        }
+    }
+    export [ NETS-EXPORT REJECT ];
+    remove-private;
+    peer-as 8695;
+}</pre>
