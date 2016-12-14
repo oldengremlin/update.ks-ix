@@ -1,10 +1,10 @@
 <h1>update.ks-ix</h1>
-Це навіть не проект, а так, нацарапано на колінці для однієї конкретної задачі: оновлення route-filter-ів у конфігурації Juniper-а для обміну трафіком у KS-IX.
+Це навіть не проект, а так, нацарапано на колінці для однієї конкретної задачі: оновлення route-filter-ів у конфігурації Juniper-а для обміну трафіком у <a href="http://ix.ks.ua/">KS-IX</a>.
 
 <h2>Що робить?</h2>
 <ol>
-<li>зчитує route-filter з виводу rtconfig-а для AS-KS-IX;</li>
-<li>зчитує активну конфігурацію policy-statement AS-KS-IX з juniper-а;</li>
+<li>зчитує route-filter з виводу rtconfig-а для <a href="http://ix.ks.ua/policy.html">AS-KS-IX</a>;</li>
+<li>зчитує активну конфігурацію policy-statement <a href="http://ix.ks.ua/policy.html">AS-KS-IX</a> з juniper-а;</li>
 <li>порівнює їх;</li>
 <li>у тому випадку якщо є розбіжності, формує строки для видалення або додання route-filter-ів для policy-statement AS-KS-IX;</li>
 <li>комітить нову конфігурацію.</li>
